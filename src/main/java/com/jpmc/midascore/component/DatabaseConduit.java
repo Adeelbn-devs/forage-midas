@@ -22,7 +22,9 @@ public class DatabaseConduit {
     }
 
     public void save(UserRecord userRecord) {
-        userRepository.save(userRecord);
+        if (userRecord != null) {
+            userRepository.save(userRecord);
+        }
     }
 
     public void processTransaction(Transaction transaction) {
