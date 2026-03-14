@@ -1,0 +1,54 @@
+From 4cbe57d446ece0f911e62b6229a63862546be5ad Mon Sep 17 00:00:00 2001
+From: College-admission <dacgadmission@gmail.com>
+Date: Sat, 14 Mar 2026 15:52:02 +0530
+Subject: [PATCH] Completed Task 4: Implemented Balance API
+
+---
+ .../com/jpmc/midascore/controller/BalanceController.java | 9 +++++++++
+ src/test/java/com/jpmc/midascore/TaskFourTests.java      | 2 +-
+ 2 files changed, 10 insertions(+), 1 deletion(-)
+
+diff --git a/src/main/java/com/jpmc/midascore/controller/BalanceController.java b/src/main/java/com/jpmc/midascore/controller/BalanceController.java
+index 18e9558..63f780f 100644
+--- a/src/main/java/com/jpmc/midascore/controller/BalanceController.java
++++ b/src/main/java/com/jpmc/midascore/controller/BalanceController.java
+@@ -2,8 +2,12 @@ package com.jpmc.midascore.controller;
+ 
+ import com.jpmc.midascore.entity.UserRecord;
+ import com.jpmc.midascore.foundation.Balance;
++import com.jpmc.midascore.foundation.Incentive;
++import com.jpmc.midascore.foundation.Transaction;
+ import com.jpmc.midascore.repository.UserRepository;
+ import org.springframework.web.bind.annotation.GetMapping;
++import org.springframework.web.bind.annotation.PostMapping;
++import org.springframework.web.bind.annotation.RequestBody;
+ import org.springframework.web.bind.annotation.RequestParam;
+ import org.springframework.web.bind.annotation.RestController;
+ 
+@@ -27,4 +31,9 @@ public Balance getBalance(@RequestParam(required = false) Long userId) {
+     }
+     return new Balance(0f);
+ }
++
++    @PostMapping("/incentive")
++    public Incentive getIncentive(@RequestBody Transaction transaction) {
++        return new Incentive();
++    }
+ }
+\ No newline at end of file
+diff --git a/src/test/java/com/jpmc/midascore/TaskFourTests.java b/src/test/java/com/jpmc/midascore/TaskFourTests.java
+index 75b941b..40e28d4 100644
+--- a/src/test/java/com/jpmc/midascore/TaskFourTests.java
++++ b/src/test/java/com/jpmc/midascore/TaskFourTests.java
+@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
+ import org.springframework.kafka.test.context.EmbeddedKafka;
+ import org.springframework.test.annotation.DirtiesContext;
+ 
+-@SpringBootTest
++@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+ @DirtiesContext
+ @EmbeddedKafka(partitions = 1, brokerProperties = {"listeners=PLAINTEXT://localhost:9092", "port=9092"})
+ public class TaskFourTests {
+-- 
+2.47.1.windows.2
+
